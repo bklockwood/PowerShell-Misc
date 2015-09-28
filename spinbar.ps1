@@ -18,6 +18,8 @@ function spinbar($job) {
 }
 #the console class is not supported in the ISE, http://goo.gl/jj8N8I
 #but this works fine in the 'regular' PowerShell console.
-Start-Job -ScriptBlock {Start-Sleep 10} -Name j1 |out-null
-spinbar j1
-remove-job j1
+if ($host.name -eq "ConsoleHost") {
+    Start-Job -ScriptBlock {Start-Sleep 10} -Name j1 |out-null
+    spinbar j1
+    remove-job j1
+}
